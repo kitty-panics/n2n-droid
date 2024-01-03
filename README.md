@@ -1,2 +1,3 @@
-# n2n-droid
-[Android] N2N console edition, gui edition (maybe).
+# N2N Android
+
+N2N console edition, gui edition (maybe).
