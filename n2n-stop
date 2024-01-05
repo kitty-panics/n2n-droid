@@ -1,0 +1,13 @@
+#!/system/bin/sh
+
+#
+# N2N Stop
+#
+
+# 
+BIN_PATH="./core/bin"
+CONF_PATH="./core/conf"
+
+# 
+#ip route list table local
+su -c "pkill edge"

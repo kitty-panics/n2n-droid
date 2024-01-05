@@ -1,0 +1,13 @@
+#!/system/bin/sh
+
+#
+# N2N Start
+#
+
+# 
+BIN_PATH="./core/bin"
+CONF_PATH="./core/conf"
+
+# 
+ip route add "$IP/24" via "$IP" dev "$DEV" table local
+su -c "$BIN_PATH/edge $CONF_PATH/edge.conf -f"

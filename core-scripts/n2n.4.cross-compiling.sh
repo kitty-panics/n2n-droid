@@ -10,6 +10,7 @@ NDK=$(cat ../tools/ndk.info)
 export TOOLCHAIN=$NDK/toolchains/llvm/prebuilt/linux-x86_64
 export TARGET=aarch64-linux-android
 
+# Configure
 export API=24 # minSdkVersion (Follow Termux)
 export AR=$TOOLCHAIN/bin/llvm-ar
 export CC=$TOOLCHAIN/bin/$TARGET$API-clang
@@ -20,7 +21,8 @@ export RANLIB=$TOOLCHAIN/bin/llvm-ranlib
 export STRIP=$TOOLCHAIN/bin/llvm-strip
 
 # Build
-mkdir ./n2n/build && cd ./n2n
+cd ./n2n
+! -d ./build || mkdir ./build
 ./autogen.sh
-./configure --host=$TARGET
-DESTDIR=./build make install
+./configure --host=$TARGET --enable-cap
+DESTDIR=./build make -j32 install
