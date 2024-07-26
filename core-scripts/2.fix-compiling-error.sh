@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+#
+# Fix Compiling error
+#
+
 # fix: sbin -> bin
 sed -i 's|/sbin|/bin|' ./n2n/Makefile
 # fix: Error: VERSION file does not match tag version (3.1.1 != )
