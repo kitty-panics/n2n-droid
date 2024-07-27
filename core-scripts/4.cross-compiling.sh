@@ -8,7 +8,7 @@
 # - https://github.com/hamishcoleman/n3n/blob/main/doc/BuildConfig.md
 # - https://github.com/ntop/n2n/issues/1110
 
-# Set NDK Env
+# Set NDK ENV
 ENV_NDK_PATH="$(which env-droid-ndk)"
 source "$ENV_NDK_PATH"
 
@@ -16,6 +16,13 @@ source "$ENV_NDK_PATH"
 mkdir -p ./n2n/build; cd ./n2n
 ./autogen.sh
 ./configure --host=$TARGET
+#./configure CFLAGS="-O3" --host=$TARGET \
+#            --enable-natpmp \
+#            --enable-miniupnp
+#            --with-zstd \
+#            --with-openssl \
+#            --enable-cap \
+#            --enable-pcap \
 
 ## Configuration at Build time
 #    # lib-zstd
@@ -38,16 +45,17 @@ mkdir -p ./n2n/build; cd ./n2n
 #echo 'LDLIBS_EXTRA+=-lpcap' >>config.mak
 #echo 'CFLAGS+=-I$(realpath ../../thirdparty/build.4.pcap/)' >>config.mak
 #echo 'LDFLAGS+=-L$(realpath ../../thirdparty/build.4.pcap/)' >>config.mak
-#    # lib-natpmp
-#echo "#define HAVE_NATPMP 1" >>include/config.h
-#echo 'LDLIBS_EXTRA+=-lnatpmp' >>config.mak
-#echo 'CFLAGS+=-I$(realpath ../../thirdparty/build.5.natpmp/)' >>config.mak
-#echo 'LDFLAGS+=-L$(realpath ../../thirdparty/build.5.natpmp/)' >>config.mak
-#    # lib-miniupnp
+    # libnatpmp
+echo "#define HAVE_NATPMP 1" >>include/config.h
+echo 'LDLIBS_EXTRA+=-lnatpmp' >>config.mak
+echo 'CFLAGS+=-I$(realpath ../../thirdparty/build.libnatpmp/)' >>config.mak
+echo 'LDFLAGS+=-L$(realpath ../../thirdparty/build.libnatpmp/)' >>config.mak
+    # miniupnp
 #echo "#define HAVE_MINIUPNP 1" >>include/config.h
 #echo 'LDLIBS_EXTRA+=-lminiupnpc' >>config.mak
-#echo 'CFLAGS+=-I$(realpath ../../thirdparty/build.6.miniupnp/miniupnpc/build/)' >>config.mak
-#echo 'LDFLAGS+=-L$(realpath ../../thirdparty/build.6.miniupnp/miniupnpc/build/)' >>config.mak
+#echo 'CFLAGS+=-I$(realpath ../../thirdparty/build.miniupnp/miniupnpc/build/)' >>config.mak
+#echo 'LDFLAGS+=-L$(realpath ../../thirdparty/build.miniupnp/miniupnpc/build/)' >>config.mak
 
 # Build and Install
+mkdir -p ./build
 DESTDIR=./build make -j32 install
