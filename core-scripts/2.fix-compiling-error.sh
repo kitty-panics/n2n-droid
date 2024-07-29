@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #
-# Fix Compiling error
+# Fix Compiling Error
 #
 
 # fix: sbin -> bin

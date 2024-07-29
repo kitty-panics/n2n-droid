@@ -1,3 +1,5 @@
 core-scripts/n2n
-thirdparty/
+thirdparty/n2n
+thirdparty/build*
+thirdparty/plug*
 tools/ndk.info
